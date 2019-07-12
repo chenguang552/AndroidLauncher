@@ -1,0 +1,45 @@
+# view res/layout/main.xml #generated:8
+-keep class android.support.v4.view.ViewPager { <init>(...); }
+
+# view AndroidManifest.xml #generated:22
+-keep class com.leecg.laucher.MainActivity { <init>(...); }
+
+# onClick res/layout/call.xml #generated:184
+-keepclassmembers class * { *** oneNumClick0(...); }
+
+# onClick res/layout/call.xml #generated:60
+-keepclassmembers class * { *** oneNumClick1(...); }
+
+# onClick res/layout/call.xml #generated:71
+-keepclassmembers class * { *** oneNumClick2(...); }
+
+# onClick res/layout/call.xml #generated:81
+-keepclassmembers class * { *** oneNumClick3(...); }
+
+# onClick res/layout/call.xml #generated:99
+-keepclassmembers class * { *** oneNumClick4(...); }
+
+# onClick res/layout/call.xml #generated:109
+-keepclassmembers class * { *** oneNumClick5(...); }
+
+# onClick res/layout/call.xml #generated:119
+-keepclassmembers class * { *** oneNumClick6(...); }
+
+# onClick res/layout/call.xml #generated:137
+-keepclassmembers class * { *** oneNumClick7(...); }
+
+# onClick res/layout/call.xml #generated:147
+-keepclassmembers class * { *** oneNumClick8(...); }
+
+# onClick res/layout/call.xml #generated:157
+-keepclassmembers class * { *** oneNumClick9(...); }
+
+# onClick res/layout/call.xml #generated:219
+-keepclassmembers class * { *** oneNumClickCall(...); }
+
+# onClick res/layout/call.xml #generated:194
+-keepclassmembers class * { *** oneNumClickDelete(...); }
+
+# onClick res/layout/call.xml #generated:175
+-keepclassmembers class * { *** oneNumClickSharp(...); }
+
