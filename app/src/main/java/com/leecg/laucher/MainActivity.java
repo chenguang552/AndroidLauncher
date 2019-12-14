@@ -6,11 +6,12 @@ import android.database.*;
 import android.database.sqlite.*;
 import android.net.*;
 import android.os.*;
+import android.provider.*;
 import android.support.v4.view.*;
 import android.view.*;
+import android.view.View.*;
 import android.widget.*;
 import java.util.*;
-import android.view.View.*;
 
 public class MainActivity extends Activity {
 	TextView phoneNumTextView;
@@ -18,11 +19,15 @@ public class MainActivity extends Activity {
 	ViewPager viewPager;
 	ArrayList<View> pageView;
 	GridView gvContacts;
+	//GridView gvApplication;
 	List<MyContacts> lMyContacts;
 	MyContactAdapter myAdapter ;
 	MyDataBase myDataBase;
 	Button addContactButton;
+	//Button startWeChart;
+	//Button startSetting;
 	boolean addButtonFlag = false;
+	//boolean addButtonFlag2 = false;
 	PopInputWindow popInputWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,10 +44,12 @@ public class MainActivity extends Activity {
 		LayoutInflater inflater =getLayoutInflater();
         View view1 = inflater.inflate(R.layout.call, null);
         View view2 = inflater.inflate(R.layout.member, null);
+		//View view3 = inflater.inflate(R.layout.application, null);
 
 		pageView =new ArrayList<View>();
 		pageView.add(view1);
 		pageView.add(view2);
+		//pageView.add(view3);
 		
 		PagerAdapter pagerAdapter=new PagerAdapter(){
 			
@@ -76,6 +83,7 @@ public class MainActivity extends Activity {
 				if(arg1 == 1 ){
 					gvContacts = findViewById(R.id.mgv);
 					addContactButton = findViewById(R.id.addContact);
+					addContactButton.setTextColor(0x00000000);
 					addContactButton.setOnLongClickListener(
 						new OnLongClickListener(){
 							@Override
@@ -217,8 +225,48 @@ public class MainActivity extends Activity {
 							
 					});
 				}
+				
+			/*	if(arg1 == 2){
+					// application
+					startWeChart = findViewById(R.id.wechat);
+					startSetting = findViewById(R.id.setting);
+
+					startWeChart.setOnClickListener(
+
+						new OnClickListener(){
+
+
+							@Override
+
+							public void onClick(View p1){
+								String weChatPackageName = "com.tencent.mm";
+
+								Intent intent = new Intent(Intent.ACTION_MAIN);
+								intent.addCategory(Intent.CATEGORY_LAUNCHER);
+								intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+								ComponentName cn = new ComponentName(weChatPackageName, "com.tencent.mm.ui.LauncherUI");
+								intent.setComponent(cn);
+								startActivity(intent);
+							}
+						});
+						startSetting.setOnClickListener(
+
+						new OnClickListener(){
+
+
+							@Override
+
+							public void onClick(View p1){
+
+								Intent intent = new Intent(Settings.ACTION_SETTINGS);
+							
+								startActivity(intent);
+							}
+						});
+				}*/
                 return pageView.get(arg1);
             }
+			
 		};
 		
 		viewPager.setAdapter(pagerAdapter);
@@ -226,10 +274,10 @@ public class MainActivity extends Activity {
 		viewPager.setCurrentItem(0);
 		
 		
-		
-		
-		
     }
+	
+	
+	
 	public void initContactsView(MyDataBase myDataBase,List<MyContacts> lMyContacts){
 		SQLiteDatabase db = myDataBase.getReadableDatabase();
 	
@@ -268,6 +316,28 @@ public class MainActivity extends Activity {
 		
 		db.close();
 		return 0;
+	}
+	public void startWechat(View view){
+		String weChatPackageName = "com.tencent.mm";
+		Intent intent = new Intent(Intent.ACTION_MAIN);
+		intent.addCategory(Intent.CATEGORY_LAUNCHER);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		ComponentName cn = new ComponentName(weChatPackageName, "com.tencent.mm.ui.LauncherUI");
+		intent.setComponent(cn);
+		startActivity(intent);
+	}
+	
+	public void startSetting(View view){
+		Intent intent = new Intent(Settings.ACTION_SETTINGS);
+		startActivity(intent);
+	}
+	
+	public void startCalendar(View view){
+		String calendarPackageName = "com.android.calendar";
+		Intent intent = new Intent(Intent.ACTION_MAIN);
+		ComponentName cn = new ComponentName(calendarPackageName, "com.android.calendar.LaunchActivity");
+		intent.setComponent(cn);
+		startActivity(intent);
 	}
 	
 	public void oneNumClick1(View view){
@@ -323,17 +393,18 @@ public class MainActivity extends Activity {
 		phoneNumTextView.setText(phoneNumber);
 	}
 	public void oneNumClickCall(View view){
-		Intent intent = new Intent(Intent.ACTION_CALL);
- 
-		Uri data = Uri.parse("tel:" + phoneNumber);
-  
-		intent.setData(data);
- 
-		startActivity(intent);
-		
-		phoneNumber = "";
-		
-		phoneNumTextView.setText("");
+		if(phoneNumber.length()==3 || phoneNumber.length()==5 || phoneNumber.length()==7 || phoneNumber.length()==11)
+		{
+			Intent intent = new Intent(Intent.ACTION_CALL);
+			Uri data = Uri.parse("tel:" + phoneNumber);
+			intent.setData(data);
+			startActivity(intent);
+			phoneNumber = "";
+			phoneNumTextView.setText("");
+		}else{
+			Toast.makeText(MainActivity.this, "电话号码无效", Toast.LENGTH_SHORT).show();
+
+		}
 	}
 	
 }

@@ -1,7 +1,7 @@
 # view res/layout/main.xml #generated:8
 -keep class android.support.v4.view.ViewPager { <init>(...); }
 
-# view AndroidManifest.xml #generated:22
+# view AndroidManifest.xml #generated:31
 -keep class com.leecg.laucher.MainActivity { <init>(...); }
 
 # onClick res/layout/call.xml #generated:184
@@ -42,4 +42,13 @@
 
 # onClick res/layout/call.xml #generated:175
 -keepclassmembers class * { *** oneNumClickSharp(...); }
+
+# onClick res/layout/member.xml #generated:58
+-keepclassmembers class * { *** startCalendar(...); }
+
+# onClick res/layout/member.xml #generated:73
+-keepclassmembers class * { *** startSetting(...); }
+
+# onClick res/layout/member.xml #generated:43
+-keepclassmembers class * { *** startWechat(...); }
 
